@@ -1,5 +1,10 @@
-This is a blank repository you can use as a starting point for your
-local chef configuration. For full details on the parts aside from 
-information contained in the README files, see the Chef wiki document
+# Setup Hugo Repository
 
-http://wiki.opscode.com/display/chef/Chef+Repository
+## Install
+
+    git clone git@github.com:jackhq/hugo-cookbooks.git
+    cd hugo-cookbooks
+    git submodule init
+    git submodule update
+    
+    

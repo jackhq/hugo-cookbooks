@@ -19,25 +19,20 @@ end
 #include_recipe "delayed_job"
 
 if node[:app] and node[:app][:ssl]
-
-  directory "/home/ubuntu/apps/#{appname}/shared/public" do
-    owner "ubuntu"
-    group "ubuntu"
-    action :create
-    recursive true
-  end
   
 
-  template "/home/ubuntu/apps/#{appname}/shared/public/htaccess" do
+  template "/home/ubuntu/apps/#{appname}/current/.htaccess" do
     owner "ubuntu"
     group "ubuntu"
     source "htaccess.erb"
+    mode 0644
   end
+end
 
-
+if node[:s3] and node[:s3][:bucket]
   execute "ln" do
-    command "ln -nsf /home/ubuntu/apps/#{appname}/shared/public/htaccess /home/ubuntu/apps/#{appname}/current/public/.htaccess"
+    command "ln -nsf /mnt/#{node[:s3][:bucket]} /home/ubuntu/apps/#{appname}/current/public/docs"
     action :run
   end
-
 end
+  
