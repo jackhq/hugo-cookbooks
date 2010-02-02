@@ -1,3 +1,11 @@
+include_recipe "packages"
+include_recipe "gems"
+include_recipe "github_keys"
+include_recipe "hugo_deploy"
+include_recipe "s3fs"
+
+
+
 ['database','s3','bucket','jasper'].each do |file|
   template "/home/ubuntu/apps/eirene4/shared/config/#{file}.yml" do
     owner "ubuntu"
