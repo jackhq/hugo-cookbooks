@@ -26,6 +26,11 @@ if node[:database] and node[:database][:name]
     source "database.erb"
   end
   
+  execute "ln" do
+    command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/database.yml /home/ubuntu/apps/#{appname}/current/config/database.yml"
+    action :run
+  end
+  
 end
 
 ### Apache Config
@@ -40,15 +45,15 @@ deploy "/home/ubuntu/apps/#{appname}" do
   if node[:github][:url]
     repo "#{node[:github][:url]}/#{appname}.git"
   end
-  user "ubuntu"
+  user node[:hugo][:app][:user] || "ubuntu"
   branch app_branch || "HEAD"
-  environment "production"
+  environment node[:hugo][:app][:environment] || "production"
   if node[:hugo][:app][:restart_command]
     restart_command node[:hugo][:app][:restart_command]  
   else
     restart_command "touch tmp/restart.txt"
   end
-  shallow_clone true
+  shallow_clone node[:hugo][:app][:shallow_clone] || true
   if node[:hugo][:app][:migrate]
     migrate node[:hugo][:app][:migrate]
   else
@@ -59,7 +64,7 @@ deploy "/home/ubuntu/apps/#{appname}" do
   else
     migration_command "rake db:migrate"
   end
-  action :deploy
+  action node[:hugo][:app][:action] || :deploy
 end
 
 
@@ -103,13 +108,6 @@ execute "ln" do
   action :run
 end
 
-if @node[:database] and @node[:database][:name]
-
-  execute "ln" do
-    command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/database.yml /home/ubuntu/apps/#{appname}/current/config/database.yml"
-    action :run
-  end
-end
 
 #
 # execute "/etc/init.d/apache2" do
