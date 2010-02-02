@@ -1,8 +1,8 @@
 {
-  "name": "web-base",
+  "name": "base-rack-apache",
   "chef_type": "role",
   "json_class": "Chef::Role",
-  "description": "The base role for systems that serve HTTP traffic",
+  "description": "Base Apache2 Passenger Rack Application Stack",
   "recipes": [
     "apache2",
     "apache2::mod_ssl",
