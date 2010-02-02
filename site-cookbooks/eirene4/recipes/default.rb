@@ -1,7 +1,5 @@
-appname = node[:application]
-
 ['database','s3','bucket','jasper'].each do |file|
-  template "/home/ubuntu/apps/#{appname}/shared/config/#{file}.yml" do
+  template "/home/ubuntu/apps/eirene4/shared/config/#{file}.yml" do
     owner "ubuntu"
     group "ubuntu"
     source "#{file}.erb"
@@ -11,17 +9,16 @@ end
 
 ['s3','bucket','jasper'].each do |file|
   execute "ln" do
-    command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/#{file}.yml /home/ubuntu/apps/#{appname}/current/config/#{file}.yml"
+    command "ln -nsf /home/ubuntu/apps/eirene4/shared/config/#{file}.yml /home/ubuntu/apps/eirene4/current/config/#{file}.yml"
     action :run
   end
 end
 
 #include_recipe "delayed_job"
 
-if node[:app] and node[:app][:ssl]
+if node[:ssl]
   
-
-  template "/home/ubuntu/apps/#{appname}/current/.htaccess" do
+  template "/home/ubuntu/apps/eirene4/current/.htaccess" do
     owner "ubuntu"
     group "ubuntu"
     source "htaccess.erb"
@@ -29,10 +26,7 @@ if node[:app] and node[:app][:ssl]
   end
 end
 
-if node[:s3] and node[:s3][:bucket]
-  execute "ln" do
-    command "ln -nsf /mnt/#{node[:s3][:bucket]} /home/ubuntu/apps/#{appname}/current/public/docs"
-    action :run
-  end
+execute "ln" do
+  command "ln -nsf /mnt/#{node[:s3][:bucket]} /home/ubuntu/apps/eirene4/current/public/docs"
+  action :run
 end
-  

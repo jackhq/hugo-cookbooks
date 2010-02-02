@@ -1,5 +1,5 @@
-appname = node[:application]
-app_branch = node[:app][:branch] if node[:app] && node[:app][:branch]
+appname = node[:hugo][:app][:name]
+app_branch = node[:hugo][:app][:branch] if node[:hugo][:app][:branch]
 
 directory "/home/ubuntu/apps/#{appname}" do
   owner "ubuntu"
@@ -8,27 +8,15 @@ directory "/home/ubuntu/apps/#{appname}" do
   recursive true
 end
 
-directory "/home/ubuntu/apps/#{appname}/shared/config" do
-  owner "ubuntu"
-  group "ubuntu"
-  action :create
-  recursive true
+['config', 'log','pids'].each do |d|
+  directory "/home/ubuntu/apps/#{appname}/shared/#{d}" do
+    owner "ubuntu"
+    group "ubuntu"
+    action :create
+    recursive true
+  end
 end
 
-### Create Log Directory
-directory "/home/ubuntu/apps/#{appname}/shared/log" do
-  owner "ubuntu"
-  group "ubuntu"
-  action :create
-  recursive true
-end
-
-directory "/home/ubuntu/apps/#{appname}/shared/pids" do
-  owner "ubuntu"
-  group "ubuntu"
-  action :create
-  recursive true
-end
 
 if node[:database] and node[:database][:name]
   ### Do Database config
@@ -55,19 +43,19 @@ deploy "/home/ubuntu/apps/#{appname}" do
   user "ubuntu"
   branch app_branch || "HEAD"
   environment "production"
-  if node[:app] && node[:app][:restart_command]
-    restart_command node[:app][:restart_command]  
+  if node[:hugo][:app][:restart_command]
+    restart_command node[:hugo][:app][:restart_command]  
   else
     restart_command "touch tmp/restart.txt"
   end
   shallow_clone true
-  if node[:app] && node[:app][:migrate]
-    migrate node[:app][:migrate]
+  if node[:hugo][:app][:migrate]
+    migrate node[:hugo][:app][:migrate]
   else
     migrate false
   end
-  if node[:app] && node[:app][:migration_command]
-    migration_command node[:app][:migration_command]  
+  if node[:hugo][:app][:migration_command]
+    migration_command node[:hugo][:app][:migration_command]
   else
     migration_command "rake db:migrate"
   end
@@ -76,16 +64,16 @@ end
 
 
 
-if node[:app] and node[:app][:ssl]
+if node[:ssl]
   ### Apache SSL Public Key
-  template "/etc/ssl/certs/#{node[:customer]}.crt" do
+  template "/etc/ssl/certs/#{appname}.crt" do
     owner "root"
     group "root"  
     source "publickey.erb"
   end
 
   ### Apache SSL Private Key
-  template "/etc/ssl/certs/#{node[:customer]}.key" do
+  template "/etc/ssl/certs/#{appname}.key" do
     owner "root"
     group "root"  
     source "privatekey.erb"
