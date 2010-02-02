@@ -68,7 +68,7 @@ end
 # end
 
 
-if node[:ssl]
+if node[:hugo][:app][:ssl]
   ### Apache SSL Public Key
   template "/etc/ssl/certs/#{appname}.crt" do
     owner "root"
