@@ -25,12 +25,7 @@ if node[:database] and node[:database][:name]
     group "ubuntu"
     source "database.erb"
   end
-  
-  execute "ln" do
-    command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/database.yml /home/ubuntu/apps/#{appname}/current/config/database.yml"
-    action :run
-  end
-  
+    
 end
 
 ### Apache Config
@@ -67,6 +62,10 @@ deploy "/home/ubuntu/apps/#{appname}" do
   action node[:hugo][:app][:action] || :deploy
 end
 
+# execute "ln" do
+#   command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/database.yml /home/ubuntu/apps/#{appname}/current/config/database.yml"
+#   action :run
+# end
 
 
 if node[:ssl]
