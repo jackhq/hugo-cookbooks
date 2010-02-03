@@ -14,7 +14,7 @@
 
 <% if @node[:app] and @node[:app][:ssl] %>
 <VirtualHost *:<%= @node[:hugo][:app][:web][:ssl]  %>>
-  DocumentRoot /home/ubuntu/apps/<%= node[:hugo][:app][:name] %>/current/public
+  DocumentRoot /home/ubuntu/apps/<%= @node[:hugo][:app][:name] %>/current/public
   
   SSLEngine on
   SSLCertificateFile /etc/ssl/certs/<%= @node[:hugo][:app][:url] %>.crt
