@@ -1,5 +1,5 @@
 <VirtualHost *:<%= @node[:hugo][:app][:web][:port]  %>>
-  DocumentRoot /home/ubuntu/apps/<%= node[:hugo][:app][:name] %>/current/public
+  DocumentRoot /home/ubuntu/apps/<%= @node[:hugo][:app][:name] %>/current/public
   <% if @node[:hugo][:app][:web] and @node[:hugo][:app][:web][:server_name] %>
     ServerName <%= @node[:hugo][:app][:web_server_name] %> 
   <% end %>
