@@ -26,7 +26,7 @@ end
 
 if node[:hugo][:app][:ssl]
   
-  template "/home/ubuntu/apps/eirene4/current/.htaccess" do
+  template "/home/ubuntu/apps/eirene4/current/public/.htaccess" do
     owner "ubuntu"
     group "ubuntu"
     source "htaccess.erb"
