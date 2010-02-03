@@ -12,7 +12,7 @@
   
 </VirtualHost>
 
-<% if @node[:app] and @node[:app][:ssl] %>
+<% if @node[:hugo][:app][:ssl] %>
 <VirtualHost *:<%= @node[:hugo][:app][:web][:ssl]  %>>
   DocumentRoot /home/ubuntu/apps/<%= @node[:hugo][:app][:name] %>/current/public
   
