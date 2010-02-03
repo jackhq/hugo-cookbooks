@@ -24,7 +24,7 @@ end
 
 #include_recipe "delayed_job"
 
-if node[:ssl]
+if node[:hugo][:app][:ssl]
   
   template "/home/ubuntu/apps/eirene4/current/.htaccess" do
     owner "ubuntu"

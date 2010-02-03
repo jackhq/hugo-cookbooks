@@ -1,11 +1,11 @@
-<VirtualHost *:8080>
-  DocumentRoot /home/ubuntu/apps/<%= @node[:application] %>/current/public
-  <% if @node[:app] and @node[:app][:web_server_name] %>
-    ServerName <%= @node[:app][:web_server_name] %> 
+<VirtualHost *:<%= @node[:hugo][:app][:web][:port]  %>>
+  DocumentRoot /home/ubuntu/apps/<%= node[:hugo][:app][:name] %>/current/public
+  <% if @node[:hugo][:app][:web] and @node[:hugo][:app][:web][:server_name] %>
+    ServerName <%= @node[:hugo][:app][:web_server_name] %> 
   <% end %>
-  <% if @node[:app] and @node[:app][:web_server_aliases] %>
-    <% @node[:app][:web_server_aliases].each do |i| %>
-      ServerAlias <%= @node[:app][:web_server_aliases][i] %> 
+  <% if @node[:hugo][:app][:web] and @node[:hugo][:app][:web][:server_aliases] %>
+    <% [:hugo][:app][:web][:server_aliases].each do |i| %>
+      ServerAlias <%= @node[:hugo][:app][:web][:server_aliases][i] %> 
     <% end %>
   <% end %>
   
@@ -13,12 +13,12 @@
 </VirtualHost>
 
 <% if @node[:app] and @node[:app][:ssl] %>
-<VirtualHost *:8443>
-  DocumentRoot /home/ubuntu/apps/<%= @node[:application] %>/current/public
+<VirtualHost *:<%= @node[:hugo][:app][:web][:ssl]  %>>
+  DocumentRoot /home/ubuntu/apps/<%= node[:hugo][:app][:name] %>/current/public
   
   SSLEngine on
-  SSLCertificateFile /etc/ssl/certs/<%= @node[:customer] %>.crt
-  SSLCertificateKeyFile /etc/ssl/certs/<%= @node[:customer] %>.key
+  SSLCertificateFile /etc/ssl/certs/<%= @node[:hugo][:app][:url] %>.crt
+  SSLCertificateKeyFile /etc/ssl/certs/<%= @node[:hugo][:app][:url] %>.key
   SSLCertificateChainFile /etc/ssl/certs/gd_bundle.crt
   
 </VirtualHost>

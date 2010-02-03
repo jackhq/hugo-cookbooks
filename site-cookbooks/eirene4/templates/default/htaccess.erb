@@ -1,3 +1,3 @@
 RewriteEngine On
-RewriteCond %{SERVER_PORT} 8080
-RewriteRule ^(.*)$ https://<%= @node[:app][:url] %>/$1 [R,L]
+RewriteCond %{SERVER_PORT} <%= @node[:hugo][:app][:web][:port] %>
+RewriteRule ^(.*)$ https://<%= @node[:hugo][:app][:url] %>/$1 [R,L]

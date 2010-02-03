@@ -70,14 +70,14 @@ end
 
 if node[:hugo][:app][:ssl]
   ### Apache SSL Public Key
-  template "/etc/ssl/certs/#{appname}.crt" do
+  template "/etc/ssl/certs/#{node[:hugo][:app][:url]}.crt" do
     owner "root"
     group "root"  
     source "publickey.erb"
   end
 
   ### Apache SSL Private Key
-  template "/etc/ssl/certs/#{appname}.key" do
+  template "/etc/ssl/certs/#{node[:hugo][:app][:url]}.key" do
     owner "root"
     group "root"  
     source "privatekey.erb"
