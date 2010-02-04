@@ -4,7 +4,7 @@
   ServerName <%= @node[:hugo][:app][:web][:server_name] %> 
   <% end %>
   <% if @node[:hugo][:app][:web][:server_aliases] %>
-    <% [:hugo][:app][:web][:server_aliases].each do |i| %>
+    <% @node[:hugo][:app][:web][:server_aliases].each do |i| %>
   ServerAlias <%= @node[:hugo][:app][:web][:server_aliases][i] %> 
     <% end %>
   <% end %>
