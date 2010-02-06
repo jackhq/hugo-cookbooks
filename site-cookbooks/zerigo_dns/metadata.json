@@ -1,0 +1,163 @@
+{
+  "dependencies": {
+    "rubygems": [
+
+    ]
+  },
+  "maintainer_email": "cookbooks@jackhq.com",
+  "conflicting": {
+
+  },
+  "description": "Creates DNS Zones and Hosts using Zerigo DNS API",
+  "recipes": {
+    "zerigo_dns": ""
+    
+  },
+  "providing": {
+    "zerigo_dns": [
+
+    ]
+  },
+  "platforms": {
+    "ubuntu": [
+
+    ],
+    "debian": [
+
+    ]
+  },
+  "version": "1.0.0",
+  "name": "zerigo_dns",
+  "replacing": {
+
+  },
+  "groupings": {
+
+  },
+  "long_description": "See Readme.md",
+  "attributes": {
+    "zerigo_dns/version": {
+      "default": "",
+      "calculated": false,
+      "type": "string",
+      "choice": [
+
+      ],
+      "description": "Zerigo_DNS Version",
+      "display_name": "Version",
+      "required": "optional",
+      "recipes": [
+
+      ]
+    },
+    "zerigo_dns/user": {
+      "default": "",
+      "calculated": false,
+      "type": "string",
+      "choice": [
+
+      ],
+      "description": "Zerigo DNS API User Name",
+      "display_name": "User",
+      "required": true,
+      "recipes": [
+
+      ]
+    },
+    "zerigo_dns/token": {
+      "default": "",
+      "calculated": false,
+      "type": "string",
+      "choice": [
+
+      ],
+      "description": "Zerigo DNS API Token",
+      "display_name": "Token",
+      "required": true,
+      "recipes": [
+
+      ]
+    },
+    "zerigo_dns/domain": {
+      "default": "",
+      "calculated": false,
+      "type": "string",
+      "choice": [
+
+      ],
+      "description": "Zerigo DNS Domain",
+      "display_name": "Domain",
+      "required": true,
+      "recipes": [
+
+      ]
+    },
+    "zerigo_dns/host": {
+      "default": "www",
+      "calculated": false,
+      "type": "string",
+      "choice": [
+
+      ],
+      "description": "Zerigo DNS Domain Host",
+      "display_name": "Host",
+      "required": "optional",
+      "recipes": [
+
+      ]
+    },
+    "zerigo_dns/type": {
+      "default": "A",
+      "calculated": false,
+      "type": "string",
+      "choice": [
+
+      ],
+      "description": "Zerigo DNS Domain Host Type",
+      "display_name": "Host Type",
+      "required": "optional",
+      "recipes": [
+
+      ]
+    },
+
+    "zerigo_dns/ttl": {
+      "default": 86400,
+      "calculated": false,
+      "type": "string",
+      "choice": [
+
+      ],
+      "description": "Zerigo DNS Domain Host TTL",
+      "display_name": "Host TTL",
+      "required": "optional",
+      "recipes": [
+
+      ]
+    },
+    "zerigo_dns/data": {
+      "default": "",
+      "calculated": false,
+      "type": "string",
+      "choice": [
+
+      ],
+      "description": "Zerigo DNS Domain Host Data",
+      "display_name": "Host Data",
+      "required": true,
+      "recipes": [
+
+      ]
+    }
+    
+    
+  },
+  "recommendations": {
+
+  },
+  "license": "Apache 2.0",
+  "maintainer": "Jack Russell Software Company, LLC",
+  "suggestions": {
+
+  }
+}
