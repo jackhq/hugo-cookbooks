@@ -59,6 +59,7 @@ deploy "/home/ubuntu/apps/#{appname}" do
   else
     migration_command "rake db:migrate"
   end
+  enable_submodules node[:hugo][:app][:enable_submodules || true
   action node[:hugo][:app][:action] || :deploy
 end
 
