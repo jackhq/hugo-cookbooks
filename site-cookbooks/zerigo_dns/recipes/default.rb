@@ -10,7 +10,7 @@
   end
 end
 
-require 'zerigo_dns'
+#require 'zerigo_dns'
 
 # Initialize Resouce
 Zerigo::DNS::Base.user = node[:zerigo_dns][:user]
