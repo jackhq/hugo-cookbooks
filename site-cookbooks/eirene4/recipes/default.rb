@@ -7,7 +7,7 @@ include_recipe "s3fs"
 
 
 ['database','s3','bucket','jasper'].each do |file|
-  template "/home/ubuntu/apps/eirene4/shared/config/#{file}.yml" do
+  template "/home/ubuntu/apps/#{node[:hugo][:app][:name]}/shared/config/#{file}.yml" do
     owner "ubuntu"
     group "ubuntu"
     source "#{file}.erb"
@@ -17,7 +17,7 @@ end
 
 ['s3','bucket','jasper'].each do |file|
   execute "ln" do
-    command "ln -nsf /home/ubuntu/apps/eirene4/shared/config/#{file}.yml /home/ubuntu/apps/eirene4/current/config/#{file}.yml"
+    command "ln -nsf /home/ubuntu/apps/#{node[:hugo][:app][:name]}/shared/config/#{file}.yml /home/ubuntu/apps/#{node[:hugo][:app][:name]}/current/config/#{file}.yml"
     action :run
   end
 end
@@ -26,7 +26,7 @@ end
 
 if node[:hugo][:app][:ssl]
   
-  template "/home/ubuntu/apps/eirene4/current/public/.htaccess" do
+  template "/home/ubuntu/apps/#{node[:hugo][:app][:name]}/current/public/.htaccess" do
     owner "ubuntu"
     group "ubuntu"
     source "htaccess.erb"
@@ -35,6 +35,6 @@ if node[:hugo][:app][:ssl]
 end
 
 execute "ln" do
-  command "ln -nsf /mnt/#{node[:s3][:bucket]} /home/ubuntu/apps/eirene4/current/public/docs"
+  command "ln -nsf /mnt/#{node[:s3][:bucket]} /home/ubuntu/apps/#{node[:hugo][:app][:name]}/current/public/docs"
   action :run
 end
