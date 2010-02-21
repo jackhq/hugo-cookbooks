@@ -1,5 +1,7 @@
+
 appname = node[:hugo][:app][:name]
 app_branch = node[:hugo][:app][:branch] if node[:hugo][:app][:branch]
+repo_url = (node[:hugo][:app][:repo] || "#{node[:github][:url]}/#{appname}.git")
 
 directory "/home/ubuntu/apps/#{appname}" do
   owner "ubuntu"
@@ -37,9 +39,7 @@ end
 
 
 deploy "/home/ubuntu/apps/#{appname}" do
-  if node[:github][:url]
-    repo "#{node[:github][:url]}/#{appname}.git"
-  end
+  repo repo_url
   user node[:hugo][:app][:user] || "ubuntu"
   branch app_branch || "HEAD"
   environment node[:hugo][:app][:environment] || "production"
