@@ -70,6 +70,12 @@ end
 
 
 if node[:hugo][:app][:ssl]
+  raise StandardError.new("APP URL is required!") unless node[:hugo][:app][:url]
+  raise StandardError.new("SSL GD_BUNDLE is required!") unless node[:hugo][:app][:ssl][:gd_bundle]
+  raise StandardError.new("SSL PUBLIC is required!") unless node[:hugo][:app][:ssl][:public]
+  raise StandardError.new("SSL PRIVATE is required!") unless node[:hugo][:app][:ssl][:private]
+  
+   
   ### Apache SSL Public Key
   template "/etc/ssl/certs/#{node[:hugo][:app][:url]}.crt" do
     owner "root"
