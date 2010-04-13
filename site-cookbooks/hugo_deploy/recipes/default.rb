@@ -84,11 +84,13 @@ if node[:hugo][:app][:ssl]
     source "privatekey.erb"
   end
 
-  ### Apache GD Bundle
-  template "/etc/ssl/certs/gd_bundle.crt" do
-    owner "root"
-    group "root"  
-    source "gd_bundle.erb"
+  if node[:hugo][:app][:ssl][:gd_bundle]
+    ### Apache GD Bundle
+    template "/etc/ssl/certs/gd_bundle.crt" do
+      owner "root"
+      group "root"  
+      source "gd_bundle.erb"
+    end
   end
 end
 
