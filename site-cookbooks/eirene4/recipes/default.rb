@@ -3,7 +3,7 @@ include_recipe "gems"
 include_recipe "github_keys"
 include_recipe "hugo_deploy"
 include_recipe "s3fs"
-
+include_recipe 'memcached'
 
 
 ['database','s3','bucket','jasper'].each do |file|
